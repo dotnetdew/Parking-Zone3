@@ -5,10 +5,6 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parking Zone", "Parking Zone.csproj", "{39913EDD-3792-4637-9027-6FF2C8A89AA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "..\Tests\Tests.csproj", "{1824935E-E35E-49F7-A66B-5C5A67F3E348}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests2", "..\Tests2\Tests2.csproj", "{2D87BC2C-7401-4B78-81F1-58FC5DF81B57}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{39913EDD-3792-4637-9027-6FF2C8A89AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39913EDD-3792-4637-9027-6FF2C8A89AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39913EDD-3792-4637-9027-6FF2C8A89AA5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1824935E-E35E-49F7-A66B-5C5A67F3E348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1824935E-E35E-49F7-A66B-5C5A67F3E348}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1824935E-E35E-49F7-A66B-5C5A67F3E348}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1824935E-E35E-49F7-A66B-5C5A67F3E348}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D87BC2C-7401-4B78-81F1-58FC5DF81B57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D87BC2C-7401-4B78-81F1-58FC5DF81B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D87BC2C-7401-4B78-81F1-58FC5DF81B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D87BC2C-7401-4B78-81F1-58FC5DF81B57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
