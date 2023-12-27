@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parking Zone", "C:\Users\abdul\OneDrive\Рабочий стол\ParkingZone\Parking-Zone\Parking Zone.csproj", "{39913EDD-3792-4637-9027-6FF2C8A89AA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "C:\Users\abdul\OneDrive\Рабочий стол\ParkingZone\Tests\Tests.csproj", "{DE724745-DA27-43A4-8C43-852C7F075DCB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{0BD2B10C-A593-462B-903D-1BB2D2A2B14F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{39913EDD-3792-4637-9027-6FF2C8A89AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39913EDD-3792-4637-9027-6FF2C8A89AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39913EDD-3792-4637-9027-6FF2C8A89AA5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE724745-DA27-43A4-8C43-852C7F075DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE724745-DA27-43A4-8C43-852C7F075DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE724745-DA27-43A4-8C43-852C7F075DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE724745-DA27-43A4-8C43-852C7F075DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BD2B10C-A593-462B-903D-1BB2D2A2B14F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BD2B10C-A593-462B-903D-1BB2D2A2B14F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BD2B10C-A593-462B-903D-1BB2D2A2B14F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BD2B10C-A593-462B-903D-1BB2D2A2B14F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

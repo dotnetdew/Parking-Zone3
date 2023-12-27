@@ -2,11 +2,10 @@
 {
     public class ParkingZoneDetailsVM
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string Description { get; set; }
-        public DateTime DateOfEstablishment { get; set; }
+        public ParkingZoneDetailsVM()
+        {
+            
+        }
         public ParkingZoneDetailsVM(Models.ParkingZone zone)
         {
             Id = zone.Id;
@@ -15,5 +14,10 @@
             Description = zone.Description;
             DateOfEstablishment = zone.DateOfEstablishment;
         }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Description { get; set; }
+        public DateTime DateOfEstablishment { get; set; }
     }
 }

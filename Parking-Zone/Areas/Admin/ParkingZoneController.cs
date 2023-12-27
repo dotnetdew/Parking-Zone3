@@ -32,7 +32,7 @@ namespace Parking_Zone.Areas.Admin
         }
 
         // GET: Admin/ParkingZones/Details/5
-        public async Task<IActionResult> Details(Guid id)
+        public IActionResult Details(Guid id)
         {
             if (id == null)
             {
@@ -40,6 +40,11 @@ namespace Parking_Zone.Areas.Admin
             }
 
             var parkingZone = _parkingZoneService.GetById(id);
+            if(parkingZone == null)
+            {
+                return NotFound();
+            }
+
             var vm = new ParkingZoneDetailsVM(parkingZone);
             if (vm == null)
             {
@@ -56,8 +61,6 @@ namespace Parking_Zone.Areas.Admin
         }
 
         // POST: Admin/ParkingZones/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(ParkingZoneCreateVM VM)
@@ -99,15 +102,18 @@ namespace Parking_Zone.Areas.Admin
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Guid id, ParkingZoneEditVM parkingZoneVM)
         {
-            var parkingZone = _parkingZoneService.GetById(id);
-
-            if (id != parkingZone.Id)
+            if(id != parkingZoneVM.Id)
             {
-                return NotFound();
+                NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var parkingZone = _parkingZoneService.GetById(id);
+                if(parkingZone == null)
+                {
+                    return NotFound();
+                }
                 try
                 {
                     parkingZoneVM.MapToModel(parkingZone);
@@ -126,7 +132,7 @@ namespace Parking_Zone.Areas.Admin
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(parkingZone);
+            return View(parkingZoneVM);
         }
 
         // GET: Admin/ParkingZones/Delete/5
@@ -155,6 +161,10 @@ namespace Parking_Zone.Areas.Admin
             if (parkingZone != null)
             {
                 _parkingZoneService.Delete(parkingZone);
+            }
+            else
+            {
+                return NotFound();
             }
 
             return RedirectToAction(nameof(Index));
