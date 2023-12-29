@@ -13,9 +13,9 @@ namespace Tests.Services
 {
     public class ParkingZoneServiceTests
     {
-        public Guid testId = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc");
+        private readonly Guid testId = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc");
 
-        public ParkingZone testParkingZone = new ParkingZone()
+        private readonly ParkingZone testParkingZone = new ParkingZone()
         {
             Id = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc"),
             Name = "Sharafshon",

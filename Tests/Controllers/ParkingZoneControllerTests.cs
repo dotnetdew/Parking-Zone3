@@ -16,9 +16,9 @@ namespace Tests.Controllers
 {
     public class ParkingZoneControllerTests
     {
-        public Guid testId = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc");
+        private readonly Guid testId = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc");
 
-        public ParkingZone testParkingZone = new ParkingZone()
+        private readonly ParkingZone testParkingZone = new ParkingZone()
         {
             Id = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc"),
             Name = "Sharafshon",
@@ -72,12 +72,12 @@ namespace Tests.Controllers
             //Assert
             Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<ParkingZoneDetailsVM>((result as ViewResult).Model);
-            Assert.Equal(JsonSerializer.Serialize(expectedParkingZoneDetailsVM), JsonSerializer.Serialize((result as ViewResult).Model));
+            Assert.Equal(JsonSerializer.Serialize(expectedParkingZoneDetailsVM), JsonSerializer.Serialize(model));
             mockService.Verify(service => service.GetById(testId), Times.Once);
         }
 
         [Fact]
-        public void GivenIdOfExistingParkingZone_WhenGetDetailsIsCalled_ThenServiceIsCalledOnceAndReturnedNotFound()
+        public void GivenIdOfNotExistingParkingZone_WhenGetDetailsIsCalled_ThenServiceIsCalledOnceAndReturnedNotFound()
         {
             //Arrange
             var mockService = new Mock<IParkingZoneService>();
@@ -278,11 +278,9 @@ namespace Tests.Controllers
         public void GivenIdAndModelWithNullName_WhenPostEditIsCalled_ThenEditViewReturnedAndModelStateIsInvalid()
         {
             //Arrange
-            var _testId = new Guid("35302cee-759c-4aca-8c10-bc506dfa198a");
-
             var parkingZoneEditVM = new ParkingZoneEditVM()
             {
-                Id = new Guid("35302cee-759c-4aca-8c10-bc506dfa198a"),
+                Id = testId,
                 Name =  null,
                 Address = "Andijon",
                 Description = "Arzon"
@@ -293,7 +291,7 @@ namespace Tests.Controllers
             controller.ModelState.AddModelError("Name", "Name is required");
 
             //Act
-            var result = controller.Edit(_testId, parkingZoneEditVM);
+            var result = controller.Edit(testId, parkingZoneEditVM);
 
             //Assert
             Assert.IsType<ViewResult>(result);

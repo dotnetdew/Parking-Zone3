@@ -34,7 +34,7 @@ namespace Parking_Zone.Areas.Admin
         // GET: Admin/ParkingZones/Details/5
         public IActionResult Details(Guid id)
         {
-            if (id == null)
+            if(id == null)
             {
                 return NotFound();
             }
@@ -46,11 +46,7 @@ namespace Parking_Zone.Areas.Admin
             }
 
             var vm = new ParkingZoneDetailsVM(parkingZone);
-            if (vm == null)
-            {
-                return NotFound();
-            }
-
+            
             return View(vm);
         }
 
@@ -65,9 +61,6 @@ namespace Parking_Zone.Areas.Admin
         [ValidateAntiForgeryToken]
         public IActionResult Create(ParkingZoneCreateVM VM)
         {
-            if (VM is null)
-                return BadRequest();
-
             if (ModelState.IsValid)
             {
                 var parkingZone = VM.MapToModel();
@@ -104,7 +97,7 @@ namespace Parking_Zone.Areas.Admin
         {
             if(id != parkingZoneVM.Id)
             {
-                NotFound();
+                return NotFound();
             }
 
             if (ModelState.IsValid)
