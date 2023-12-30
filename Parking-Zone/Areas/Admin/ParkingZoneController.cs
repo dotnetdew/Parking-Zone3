@@ -34,13 +34,13 @@ namespace Parking_Zone.Areas.Admin
         // GET: Admin/ParkingZones/Details/5
         public IActionResult Details(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var parkingZone = _parkingZoneService.GetById(id);
-            if(parkingZone == null)
+            if (parkingZone == null)
             {
                 return NotFound();
             }
@@ -95,7 +95,7 @@ namespace Parking_Zone.Areas.Admin
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Guid id, ParkingZoneEditVM parkingZoneVM)
         {
-            if(id != parkingZoneVM.Id)
+            if (id != parkingZoneVM.Id)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace Parking_Zone.Areas.Admin
             if (ModelState.IsValid)
             {
                 var parkingZone = _parkingZoneService.GetById(id);
-                if(parkingZone == null)
+                if (parkingZone == null)
                 {
                     return NotFound();
                 }
