@@ -13,9 +13,9 @@ namespace Tests.Services
 {
     public class ParkingZoneServiceTests
     {
-        private readonly Guid testId = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc");
+        private readonly Guid _testId = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc");
 
-        private readonly ParkingZone testParkingZone = new ParkingZone()
+        private readonly ParkingZone _testParkingZone = new ParkingZone()
         {
             Id = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc"),
             Name = "Sharafshon",
@@ -31,14 +31,14 @@ namespace Tests.Services
             {
                 new ParkingZone()
                 {
-                    Id = testId,
+                    Id = _testId,
                     Name = "Sharafshon",
                     Address = "Andijon",
                     Description = "Arzon"
                 },
                 new ParkingZone()
                 {
-                    Id = testId,
+                    Id = _testId,
                     Name = "R7",
                     Address = "Farg'ona",
                     Description = "Qimmat"
@@ -69,17 +69,17 @@ namespace Tests.Services
             var mockRepository = new Mock<IParkingZoneRepository>();
 
             mockRepository
-                .Setup(repo => repo.GetById(testId))
-                .Returns(testParkingZone);
+                .Setup(repo => repo.GetById(_testId))
+                .Returns(_testParkingZone);
 
             var service = new ParkingZoneService(mockRepository.Object);
 
             //Act
-            var result = service.GetById(testId);
+            var result = service.GetById(_testId);
 
             //Assert
-            Assert.Equal(JsonSerializer.Serialize(testParkingZone), JsonSerializer.Serialize(result));
-            mockRepository.Verify(repo => repo.GetById(testId), Times.Once);
+            Assert.Equal(JsonSerializer.Serialize(_testParkingZone), JsonSerializer.Serialize(result));
+            mockRepository.Verify(repo => repo.GetById(_testId), Times.Once);
         }
         #endregion
 
@@ -116,17 +116,17 @@ namespace Tests.Services
             var mockRepository = new Mock<IParkingZoneRepository>();
 
             mockRepository
-                .Setup(repo => repo.Update(testParkingZone));
+                .Setup(repo => repo.Update(_testParkingZone));
             mockRepository
                 .Setup(repo => repo.Save());
 
             var service = new ParkingZoneService(mockRepository.Object);
 
             //Act
-            service.Update(testParkingZone);
+            service.Update(_testParkingZone);
 
             //Assert
-            mockRepository.Verify(repo => repo.Update(testParkingZone), Times.Once);
+            mockRepository.Verify(repo => repo.Update(_testParkingZone), Times.Once);
             mockRepository.Verify(repo => repo.Save(), Times.Once);
         }
         #endregion
@@ -138,17 +138,17 @@ namespace Tests.Services
             //Arrange
             var mockRepository = new Mock<IParkingZoneRepository>();
             mockRepository
-                .Setup(repo => repo.Delete(testParkingZone));
+                .Setup(repo => repo.Delete(_testParkingZone));
             mockRepository
                 .Setup(repo => repo.Save());
 
             var service = new ParkingZoneService(mockRepository.Object);
 
             //Act
-            service.Delete(testParkingZone);
+            service.Delete(_testParkingZone);
 
             //Assert
-            mockRepository.Verify(repo => repo.Delete(testParkingZone), Times.Once);
+            mockRepository.Verify(repo => repo.Delete(_testParkingZone), Times.Once);
             mockRepository.Verify(repo => repo.Save(), Times.Once);
         }
         #endregion

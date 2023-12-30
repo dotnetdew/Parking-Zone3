@@ -16,9 +16,9 @@ namespace Tests.Controllers
 {
     public class ParkingZoneControllerTests
     {
-        private readonly Guid testId = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc");
+        private readonly Guid _testId = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc");
 
-        private readonly ParkingZone testParkingZone = new ParkingZone()
+        private readonly ParkingZone _testParkingZone = new ParkingZone()
         {
             Id = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc"),
             Name = "Sharafshon",
@@ -54,7 +54,7 @@ namespace Tests.Controllers
             //Arrange
             var expectedParkingZoneDetailsVM = new ParkingZoneDetailsVM()
             {
-                Id = testId,
+                Id = _testId,
                 Name = "Sharafshon",
                 Address = "Andijon",
                 Description = "Arzon"
@@ -62,18 +62,18 @@ namespace Tests.Controllers
 
             var mockService = new Mock<IParkingZoneService>();
 
-            mockService.Setup(service => service.GetById(testId)).Returns(testParkingZone);
+            mockService.Setup(service => service.GetById(_testId)).Returns(_testParkingZone);
 
             var controller = new ParkingZoneController(mockService.Object);
 
             //Act
-            var result = controller.Details(testId);
+            var result = controller.Details(_testId);
 
             //Assert
             Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<ParkingZoneDetailsVM>((result as ViewResult).Model);
             Assert.Equal(JsonSerializer.Serialize(expectedParkingZoneDetailsVM), JsonSerializer.Serialize(model));
-            mockService.Verify(service => service.GetById(testId), Times.Once);
+            mockService.Verify(service => service.GetById(_testId), Times.Once);
         }
 
         [Fact]
@@ -85,11 +85,11 @@ namespace Tests.Controllers
             var controller = new ParkingZoneController(mockService.Object);
 
             //Act
-            var result = controller.Details(testId);
+            var result = controller.Details(_testId);
 
             //Assert
             Assert.True(result is NotFoundResult);
-            mockService.Verify(service => service.GetById(testId), Times.Once);
+            mockService.Verify(service => service.GetById(_testId), Times.Once);
         }
         #endregion
 
@@ -194,11 +194,11 @@ namespace Tests.Controllers
             var controller = new ParkingZoneController(mockService.Object);
 
             //Act
-            var result = controller.Edit(testId);
+            var result = controller.Edit(_testId);
 
             //Assert
             Assert.True(result is NotFoundResult);
-            mockService.Verify(service => service.GetById(testId), Times.Once);
+            mockService.Verify(service => service.GetById(_testId), Times.Once);
         }
 
         [Fact]
@@ -207,7 +207,7 @@ namespace Tests.Controllers
             //Arrange
             var expectedParkingZoneEditVM = new ParkingZoneEditVM()
             {
-                Id = testId,
+                Id = _testId,
                 Name = "Sharafshon",
                 Address = "Andijon",
                 Description = "Arzon"
@@ -215,12 +215,12 @@ namespace Tests.Controllers
 
             var mockService = new Mock<IParkingZoneService>();
 
-            mockService.Setup(service => service.GetById(testId)).Returns(testParkingZone);
+            mockService.Setup(service => service.GetById(_testId)).Returns(_testParkingZone);
 
             var controller = new ParkingZoneController(mockService.Object);
 
             //Act
-            var result = controller.Edit(testId);
+            var result = controller.Edit(_testId);
 
             //Assert
             Assert.IsType<ViewResult>(result);
@@ -229,7 +229,7 @@ namespace Tests.Controllers
             var model = (result as ViewResult).Model as ParkingZoneEditVM;
 
             Assert.Equal(JsonSerializer.Serialize(expectedParkingZoneEditVM), JsonSerializer.Serialize(model));
-            mockService.Verify(service => service.GetById(testId), Times.Once);
+            mockService.Verify(service => service.GetById(_testId), Times.Once);
         }
 
         [Fact]
@@ -244,7 +244,7 @@ namespace Tests.Controllers
             var controller = new ParkingZoneController(Mock.Of<IParkingZoneService>());
 
             //Act
-            var result = controller.Edit(testId, parkingZoneEditVM);
+            var result = controller.Edit(_testId, parkingZoneEditVM);
 
             //Assert
             Assert.True(result is NotFoundResult);
@@ -256,7 +256,7 @@ namespace Tests.Controllers
             //Arrange
             var parkingZoneEditVM = new ParkingZoneEditVM()
             {
-                Id = testId,
+                Id = _testId,
                 Name = "Sharafshon",
                 Address = "Andijon",
                 Description = "Arzon"
@@ -267,11 +267,11 @@ namespace Tests.Controllers
             var controller = new ParkingZoneController(mockService.Object);
 
             //Act
-            var result = controller.Edit(testId, parkingZoneEditVM);
+            var result = controller.Edit(_testId, parkingZoneEditVM);
 
             //Asert
             Assert.True(result is NotFoundResult);
-            mockService.Verify(service => service.GetById(testId), Times.Once);
+            mockService.Verify(service => service.GetById(_testId), Times.Once);
         }
 
         [Fact]
@@ -280,7 +280,7 @@ namespace Tests.Controllers
             //Arrange
             var parkingZoneEditVM = new ParkingZoneEditVM()
             {
-                Id = testId,
+                Id = _testId,
                 Name =  null,
                 Address = "Andijon",
                 Description = "Arzon"
@@ -291,7 +291,7 @@ namespace Tests.Controllers
             controller.ModelState.AddModelError("Name", "Name is required");
 
             //Act
-            var result = controller.Edit(testId, parkingZoneEditVM);
+            var result = controller.Edit(_testId, parkingZoneEditVM);
 
             //Assert
             Assert.IsType<ViewResult>(result);
@@ -334,7 +334,7 @@ namespace Tests.Controllers
             //Arrange
             var _testId = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc");
 
-            var _testParkingZone = new ParkingZoneEditVM()
+            var testParkingZone = new ParkingZoneEditVM()
             {
                 Id = Guid.Parse("dd09a090-b0f6-4369-b24a-656843d227bc"),
                 Name = "Sharafshon",
@@ -345,15 +345,15 @@ namespace Tests.Controllers
             var mockService = new Mock<IParkingZoneService>();
 
             mockService
-                .Setup(service => service.GetById(testId))
-                .Returns(testParkingZone);
+                .Setup(service => service.GetById(_testId))
+                .Returns(_testParkingZone);
             mockService
                 .Setup(service => service.Update(It.IsAny<ParkingZone>()));
 
             var controller = new ParkingZoneController(mockService.Object);
 
             //Act
-            var result = controller.Edit(_testId, _testParkingZone);
+            var result = controller.Edit(_testId, testParkingZone);
 
             //Assert
             Assert.IsType<RedirectToActionResult>(result);
@@ -362,7 +362,7 @@ namespace Tests.Controllers
             Assert.Null(redirectToActionResult.ControllerName);
             Assert.Equal("Index", redirectToActionResult.ActionName);
 
-            mockService.Verify(service => service.GetById(testId), Times.Once);
+            mockService.Verify(service => service.GetById(_testId), Times.Once);
             mockService.Verify(service => service.Update(It.IsAny<ParkingZone>()), Times.Once);
         }
         #endregion
@@ -377,34 +377,33 @@ namespace Tests.Controllers
             var controller = new ParkingZoneController(mockService.Object);
 
             //Act
-            var result = controller.Delete(testId);
+            var result = controller.Delete(_testId);
 
             //Assert
             Assert.True(result is NotFoundResult);
-            mockService.Verify(service => service.GetById(testId), Times.Once);
+            mockService.Verify(service => service.GetById(_testId), Times.Once);
         }
 
         [Fact]
         public void GivenId_WhenGetDeleteIsCalled_ThenNotEmptyViewResultIsReturned()
         {
             //Arrange
-            var _testId = Guid.Parse("02a3f2c6-25d6-4d9d-9f0c-43b2d96eecd1");
             string testName = "Sharafshon";
             string testAdress = "Andijon";
             string testDescription = "Arzon";
 
             var mockService = new Mock<IParkingZoneService>();
-            mockService.Setup(service => service.GetById(testId)).Returns(testParkingZone);
+            mockService.Setup(service => service.GetById(_testId)).Returns(_testParkingZone);
 
             var controller = new ParkingZoneController(mockService.Object);
 
             //Act
-            var result = controller.Delete(testId);
+            var result = controller.Delete(_testId);
 
             //Assert
             Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<ParkingZone>((result as ViewResult).Model);
-            Assert.Equal(testId, model.Id);
+            Assert.Equal(_testId, model.Id);
             Assert.Equal(testName, model.Name);
             Assert.Equal(testAdress, model.Address);
             Assert.Equal(testDescription, model.Description);
@@ -418,11 +417,11 @@ namespace Tests.Controllers
             var controller = new ParkingZoneController(mockService.Object);
 
             //Act
-            var result = controller.DeleteConfirmed(testId);
+            var result = controller.DeleteConfirmed(_testId);
 
             //Assert
             Assert.True(result is NotFoundResult);
-            mockService.Verify(service => service.GetById(testId), Times.Once());
+            mockService.Verify(service => service.GetById(_testId), Times.Once());
         }
 
         [Fact]
@@ -432,7 +431,7 @@ namespace Tests.Controllers
             var mockService = new Mock<IParkingZoneService>();
 
             mockService
-                .Setup(service => service.GetById(testId)).Returns(testParkingZone);
+                .Setup(service => service.GetById(_testId)).Returns(_testParkingZone);
 
             mockService
                 .Setup(service => service.Delete(It.IsAny<ParkingZone>()));
@@ -440,13 +439,13 @@ namespace Tests.Controllers
             var controller = new ParkingZoneController(mockService.Object);
 
             //Act
-            var result = controller.DeleteConfirmed(testId);
+            var result = controller.DeleteConfirmed(_testId);
 
             //Assert
             Assert.IsType<RedirectToActionResult>(result);
             var redirectToActionResult = result as RedirectToActionResult;
             Assert.Null(redirectToActionResult.ControllerName);
-            mockService.Verify(service => service.GetById(testId), Times.Once);
+            mockService.Verify(service => service.GetById(_testId), Times.Once);
             mockService.Verify(service => service.Delete(It.IsAny<ParkingZone>()), Times.Once);
         }
         #endregion

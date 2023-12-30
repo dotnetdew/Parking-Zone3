@@ -19,7 +19,7 @@ namespace Parking_Zone.Areas.Admin
         private readonly IParkingZoneService _parkingZoneService;
         public ParkingZoneController(IParkingZoneService parkingZoneService)
         {
-            this._parkingZoneService = parkingZoneService;
+            _parkingZoneService = parkingZoneService;
         }
 
         // GET: Admin/ParkingZones
@@ -107,22 +107,10 @@ namespace Parking_Zone.Areas.Admin
                 {
                     return NotFound();
                 }
-                try
-                {
-                    parkingZoneVM.MapToModel(parkingZone);
-                    _parkingZoneService.Update(parkingZone);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (_parkingZoneService.GetById(id) is null)
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                
+                parkingZoneVM.MapToModel(parkingZone);
+                _parkingZoneService.Update(parkingZone);
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(parkingZoneVM);
