@@ -108,7 +108,7 @@ namespace Parking_Zone.Areas.Admin
                     return NotFound();
                 }
                 
-                parkingZoneVM.MapToModel(parkingZone);
+                parkingZone = parkingZoneVM.MapToModel(parkingZone);
                 _parkingZoneService.Update(parkingZone);
                 
                 return RedirectToAction(nameof(Index));
