@@ -1,4 +1,5 @@
-﻿namespace Parking_Zone.ViewModels.ParkingZone
+﻿using Parking_Zone.Models;
+namespace Parking_Zone.ViewModels.ParkingZone
 {
     public class ParkingZoneEditVM
     {
@@ -18,11 +19,13 @@
             this.Address = zone.Address;
             this.Description = zone.Description;
         }
-        public void MapToModel(Models.ParkingZone zone)
+        public Models.ParkingZone MapToModel(Models.ParkingZone zone)
         {
             zone.Name = Name;
             zone.Address = Address;
             zone.Description = Description;
+
+            return zone;
         }
     }
 }
