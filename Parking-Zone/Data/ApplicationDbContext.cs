@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 using Parking_Zone.Models;
 
 namespace Parking_Zone.Data
@@ -11,5 +12,6 @@ namespace Parking_Zone.Data
         {
         }
         public DbSet<ParkingZone> ParkingZones { get; set; }
+        public DbSet<ParkingSlot> ParkingSlots { get; set; }
     }
 }

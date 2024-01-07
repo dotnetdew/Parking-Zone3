@@ -16,6 +16,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddScoped<IParkingZoneRepository, ParkingZoneRepository>();
 builder.Services.AddScoped<IParkingZoneService, ParkingZoneService>();
+builder.Services.AddScoped<IParkingSlotRepository, ParkingSlotRepository>();
+builder.Services.AddScoped<IParkingSlotService, ParkingSlotService>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();

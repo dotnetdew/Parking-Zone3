@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Parking_Zone.ViewModels.ParkingSlot.ParkingSlotListItemVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Slots for @ViewData["parkingZoneName"]</h1>
+
+<p>
+    <a asp-asp-controller="ParkingSlots" asp-action="Create" asp-route-parkingZoneId="@ViewData["parkingZoneId"]">Create New Slot for Parking Zone @ViewData["parkingZoneName"]</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAvailableForBooking)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailableForBooking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

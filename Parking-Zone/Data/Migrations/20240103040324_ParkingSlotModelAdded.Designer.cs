@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Parking_Zone.Data;
 
@@ -11,9 +12,11 @@ using Parking_Zone.Data;
 namespace Parking_Zone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240103040324_ParkingSlotModelAdded")]
+    partial class ParkingSlotModelAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,31 +227,6 @@ namespace Parking_Zone.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Parking_Zone.Models.ParkingSlot", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsAvailableForBooking")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ParkingZoneId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParkingZoneId");
-
-                    b.ToTable("ParkingSlots");
-                });
-
             modelBuilder.Entity("Parking_Zone.Models.ParkingZone", b =>
                 {
                     b.Property<Guid>("Id")
@@ -329,17 +307,6 @@ namespace Parking_Zone.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Parking_Zone.Models.ParkingSlot", b =>
-                {
-                    b.HasOne("Parking_Zone.Models.ParkingZone", "ParkingZone")
-                        .WithMany()
-                        .HasForeignKey("ParkingZoneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ParkingZone");
                 });
 
             modelBuilder.Entity("Parking_Zone.Models.ParkingZone", b =>
