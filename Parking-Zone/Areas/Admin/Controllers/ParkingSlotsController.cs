@@ -17,24 +17,21 @@ namespace Parking_Zone.Areas.Admin.Controllers
     {
         private readonly IParkingSlotService _parkingSlotService;
         private readonly IParkingZoneService _parkingZoneService;
-
-        private readonly ApplicationDbContext _context;
-
-        public ParkingSlotsController(ApplicationDbContext context, IParkingZoneService parkingZoneService, IParkingSlotService parkingSlotService)
+        public ParkingSlotsController(IParkingZoneService parkingZoneService, IParkingSlotService parkingSlotService)
         {
-            _context = context;
             _parkingZoneService = parkingZoneService;
             _parkingSlotService = parkingSlotService;
         }
 
         // GET: Admin/ParkingSlots
-        public async Task<IActionResult> Index(Guid parkingZoneId)
+        public IActionResult Index(Guid parkingZoneId)
         {
             var slots = _parkingSlotService.GetByParkingZoneId(parkingZoneId);
 
             var slotVMs = slots.Select(x => new ParkingSlotListItemVM(x)).ToList();
 
             var parkingZone = _parkingZoneService.GetById(parkingZoneId);
+
             ViewData["parkingZoneName"] = parkingZone.Name;
             ViewData["parkingZoneId"] = parkingZoneId;
 
@@ -127,7 +124,7 @@ namespace Parking_Zone.Areas.Admin.Controllers
         }
 
         // GET: Admin/ParkingSlots/Delete/5
-        public async Task<IActionResult> Delete(Guid id)
+        public IActionResult Delete(Guid id)
         {
             if (id == null)
             {
@@ -163,9 +160,9 @@ namespace Parking_Zone.Areas.Admin.Controllers
             return RedirectToAction("Index", "ParkingSlots", new { ParkingZoneId = parkingZoneId });
         }
 
-        private bool ParkingSlotExists(Guid id)
-        {
-            return _context.ParkingSlots.Any(e => e.Id == id);
-        }
+        //private bool ParkingSlotExists(Guid id)
+        //{
+        //    return _context.ParkingSlots.Any(e => e.Id == id);
+        //}
     }
 }
