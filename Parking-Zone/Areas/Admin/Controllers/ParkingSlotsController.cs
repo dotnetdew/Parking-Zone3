@@ -32,6 +32,11 @@ namespace Parking_Zone.Areas.Admin.Controllers
 
             var parkingZone = _parkingZoneService.GetById(parkingZoneId);
 
+            if (parkingZone is null)
+            {
+                return BadRequest();
+            }
+
             ViewData["parkingZoneName"] = parkingZone.Name;
             ViewData["parkingZoneId"] = parkingZoneId;
 
@@ -46,7 +51,6 @@ namespace Parking_Zone.Areas.Admin.Controllers
             if (slot is null)
                 return NotFound();
 
-            slot.ParkingZone = _parkingZoneService.GetById(slot.ParkingZoneId);
             var slotVM = new ParkingSlotDetailsVM(slot);
 
             return View(slotVM);
@@ -55,10 +59,17 @@ namespace Parking_Zone.Areas.Admin.Controllers
         // GET: Admin/ParkingSlots/Create
         public IActionResult Create(Guid parkingZoneId)
         {
+            var parkingZone = _parkingZoneService.GetById(parkingZoneId);
+
+            if (parkingZone is null)
+            {
+                return NotFound("Parking Zone isn't Found");
+            }
+
             var parkingSlotCreateVM = new ParkingSlotCreateVM();
 
             parkingSlotCreateVM.ParkingZoneId = parkingZoneId;
-            parkingSlotCreateVM.ParkingZoneName = _parkingZoneService.GetById(parkingZoneId).Name;
+            parkingSlotCreateVM.ParkingZoneName = parkingZone.Name;
 
             return View(parkingSlotCreateVM);
         }
@@ -85,7 +96,6 @@ namespace Parking_Zone.Areas.Admin.Controllers
                 return NotFound();
             }
             var parkingSlot = _parkingSlotService.GetById(id);
-            parkingSlot.ParkingZone = _parkingZoneService.GetById(parkingSlot.ParkingZoneId);
 
             if (parkingSlot == null)
             {
@@ -131,7 +141,6 @@ namespace Parking_Zone.Areas.Admin.Controllers
                 return NotFound();
             }
             var slot = _parkingSlotService.GetById(id);
-            slot.ParkingZone = _parkingZoneService.GetById(slot.ParkingZoneId);
 
             if (slot == null)
             {

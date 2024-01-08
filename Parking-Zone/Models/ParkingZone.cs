@@ -7,6 +7,6 @@
         public string Address { get; set; }
         public DateTime DateOfEstablishment { get; set; }
         public string Description { get; set; }
-        public ICollection<ParkingZone> ParkingZones { get; set; }
+        public virtual ICollection<ParkingSlot> ParkingSlots { get; set; }
     }
 }

@@ -10,8 +10,8 @@ namespace Parking_Zone.Models
         public int Number { get; set; }
         public bool IsAvailableForBooking { get; set; }
         public SlotCategoryEnum Category { get; set; }
-        public ParkingZone ParkingZone { get; set; }
         [ForeignKey("ParkingZone")]
         public Guid ParkingZoneId { get; set; }
+        public virtual ParkingZone ParkingZone { get; set; }
     }
 }
