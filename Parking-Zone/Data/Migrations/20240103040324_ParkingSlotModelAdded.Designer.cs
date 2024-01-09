@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Parking_Zone.Data;
 
@@ -11,16 +12,15 @@ using Parking_Zone.Data;
 namespace Parking_Zone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240103040324_ParkingSlotModelAdded")]
+    partial class ParkingSlotModelAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.0")
-                .HasAnnotation("Proxies:ChangeTracking", false)
-                .HasAnnotation("Proxies:CheckEquality", false)
-                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -227,31 +227,6 @@ namespace Parking_Zone.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Parking_Zone.Models.ParkingSlot", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsAvailableForBooking")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ParkingZoneId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParkingZoneId");
-
-                    b.ToTable("ParkingSlots");
-                });
-
             modelBuilder.Entity("Parking_Zone.Models.ParkingZone", b =>
                 {
                     b.Property<Guid>("Id")
@@ -273,7 +248,12 @@ namespace Parking_Zone.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("ParkingZoneId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ParkingZoneId");
 
                     b.ToTable("ParkingZones");
                 });
@@ -329,20 +309,16 @@ namespace Parking_Zone.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Parking_Zone.Models.ParkingSlot", b =>
+            modelBuilder.Entity("Parking_Zone.Models.ParkingZone", b =>
                 {
-                    b.HasOne("Parking_Zone.Models.ParkingZone", "ParkingZone")
-                        .WithMany("ParkingSlots")
-                        .HasForeignKey("ParkingZoneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ParkingZone");
+                    b.HasOne("Parking_Zone.Models.ParkingZone", null)
+                        .WithMany("ParkingZones")
+                        .HasForeignKey("ParkingZoneId");
                 });
 
             modelBuilder.Entity("Parking_Zone.Models.ParkingZone", b =>
                 {
-                    b.Navigation("ParkingSlots");
+                    b.Navigation("ParkingZones");
                 });
 #pragma warning restore 612, 618
         }

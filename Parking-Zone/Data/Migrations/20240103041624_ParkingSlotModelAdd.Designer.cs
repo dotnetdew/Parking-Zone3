@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Parking_Zone.Data;
 
@@ -11,16 +12,15 @@ using Parking_Zone.Data;
 namespace Parking_Zone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240103041624_ParkingSlotModelAdd")]
+    partial class ParkingSlotModelAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.0")
-                .HasAnnotation("Proxies:ChangeTracking", false)
-                .HasAnnotation("Proxies:CheckEquality", false)
-                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -273,7 +273,12 @@ namespace Parking_Zone.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("ParkingZoneId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ParkingZoneId");
 
                     b.ToTable("ParkingZones");
                 });
@@ -332,7 +337,7 @@ namespace Parking_Zone.Data.Migrations
             modelBuilder.Entity("Parking_Zone.Models.ParkingSlot", b =>
                 {
                     b.HasOne("Parking_Zone.Models.ParkingZone", "ParkingZone")
-                        .WithMany("ParkingSlots")
+                        .WithMany()
                         .HasForeignKey("ParkingZoneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -342,7 +347,14 @@ namespace Parking_Zone.Data.Migrations
 
             modelBuilder.Entity("Parking_Zone.Models.ParkingZone", b =>
                 {
-                    b.Navigation("ParkingSlots");
+                    b.HasOne("Parking_Zone.Models.ParkingZone", null)
+                        .WithMany("ParkingZones")
+                        .HasForeignKey("ParkingZoneId");
+                });
+
+            modelBuilder.Entity("Parking_Zone.Models.ParkingZone", b =>
+                {
+                    b.Navigation("ParkingZones");
                 });
 #pragma warning restore 612, 618
         }
