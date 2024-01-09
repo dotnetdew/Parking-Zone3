@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Parking_Zone.Areas.Admin;
+using Parking_Zone.Areas.Admin.Controllers;
 using Parking_Zone.Models;
 using Parking_Zone.Services;
 using Parking_Zone.ViewModels.ParkingZone;
@@ -41,7 +42,7 @@ namespace Tests.Controllers
             var result = controller.Index();
 
             //Assert
-            Assert.IsType<ViewResult>(result);
+            Assert.IsType<ViewResult>(result); 
             Assert.NotNull((result as ViewResult).Model);
             mockService.Verify(service => service.GetAll(), Times.Once);
         }
@@ -300,7 +301,7 @@ namespace Tests.Controllers
         }
 
         [Fact]
-        public void GivenIdAndModelWithNullAddress_WhenPostEditIsCalled_ThenEditViewReturnedAndModelStateIsInvelid()
+        public void GivenIdAndModelWithNullAddress_WhenPostEditIsCalled_ThenEditViewReturnedAndModelStateIsInvalid()
         {
             //Arrange
             var _testId = new Guid("dd09a090-b0f6-4369-b24a-656843d227bc");
@@ -410,7 +411,7 @@ namespace Tests.Controllers
         }
 
         [Fact]
-        public void GivenIdOfExistingZone_WhenPostDeleteConfirmedIsCalled_ThenReturnedNotFoundServiceIsCalledOnce()
+        public void GivenIdOfNotExistingZone_WhenPostDeleteConfirmedIsCalled_ThenReturnedNotFoundServiceIsCalledOnce()
         {
             //Arrange
             var mockService = new Mock<IParkingZoneService>();
