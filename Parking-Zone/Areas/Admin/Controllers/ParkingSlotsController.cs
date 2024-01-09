@@ -63,7 +63,7 @@ namespace Parking_Zone.Areas.Admin.Controllers
 
             if (parkingZone is null)
             {
-                return NotFound("Parking Zone isn't Found");
+                return BadRequest();
             }
 
             var parkingSlotCreateVM = new ParkingSlotCreateVM();
